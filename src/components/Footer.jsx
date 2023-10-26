@@ -5,7 +5,7 @@ import { MDBIcon} from 'mdb-react-ui-kit';
 
 function Footer() {
   return (
-    <div  id='footer' style={{width:'100%',height:'450px',backgroundColor:'#e7f1da'}} className='d-flex justify-content-evenly align-items-center flex-column  text-dark z-1 '>
+    <div  id='footer' style={{width:'100%',height:'450px',backgroundColor:'#e7f1da'}} className='d-flex justify-content-evenly align-items-center flex-column  text-dark '>
       <div  className='d-flex justify-content-evenly w-100 flex-wrap'>
         <div  className='d-flex flex-column justify-content-center align-items-center'>
            <h4><Link to={'/'} style={{textDecoration:'none',color:'black',fontWeight:'bold'}}>
@@ -45,6 +45,7 @@ Phone number: 123-456-7890
               </div>
         </div>
       </div>
+     
       <div style={{width:'400px',height:'50px'}} className='w-100 d-flex justify-content-center align-items-end text-center '>
         <p>© 2023 by Sajith Kumar. Project Fair</p>
       </div>
