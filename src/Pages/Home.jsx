@@ -3,9 +3,11 @@ import {Row,Col, Button} from 'react-bootstrap'
 import titleImg from '../Assets/4183733.webp'
 import Projectcard from '../components/Projectcard'
 import { Link } from 'react-router-dom'
+import Header from '../components/Header'
 function Home() {
   return (
     <>
+    <Header/>
     {/* landing page */}
     
      <div style={{backgroundColor:'#e7f1da',width:'100%',height:'600px'}} className='container-fluid rounded' >
@@ -13,10 +15,10 @@ function Home() {
         <Col sm={12} md={6}>
           <h1 style={{fontSize:'50px'}}  className='fw-bolder text-dark'>Project Fair</h1>
           <p>One stop destination for all yopur projects. Where user can add ad manage their projects. As wella s access all our projects inn our website...</p>
-          <Button> Explore </Button>
+          <Link to={'/login'} className='btn bg-dark text-light'> Explore </Link>
         </Col>
         <Col sm={12} md={6}>
-         <img style={{marginTop:'50px'}} className='w-75 ms-5' src={titleImg} alt="" />
+         <img  className='w-75 ms-5 img-fluid' src={titleImg} alt="" />
         </Col>
 
         </Row>
@@ -31,13 +33,7 @@ function Home() {
         <Col sm={12} md={6} lg={4}>
           <Projectcard/>
         </Col>
-        <Col sm={12} md={6} lg={4}>
-          <Projectcard/>
-        </Col>
-        <Col sm={12} md={6} lg={4}>
-          <Projectcard/>
-        </Col>
-
+       
         </Row>
 
 
