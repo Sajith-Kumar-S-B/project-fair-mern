@@ -2,7 +2,8 @@ import './App.css';
 import {Route, Routes} from 'react-router-dom'
 import Home from './Pages/Home';
 import DashBoard from './Pages/DashBoard';
-
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import Projects from './Pages/Projects';
 import Footer from './components/Footer';
 import Auth from './components/Auth';
@@ -24,6 +25,19 @@ function App() {
 
     </Routes>
     <Footer/>
+
+    <ToastContainer
+position="top-right"
+autoClose={3000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
       
     </div>
   );

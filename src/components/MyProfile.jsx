@@ -15,7 +15,8 @@ function MyProfile() {
               <Form className='mb-3 text-center'>
                  <label className='mb-3' htmlFor='profile'> 
                  <input id='profile' style={{display:'none'}} type="file" />
-                 <img className='p-4'  width={'100%'} src={userImg} alt="" /></label>
+                 <img className='p-4'  width={'100%'} src={userImg} alt="" />
+                 </label>
               <Form.Control className='mb-3'  type="text" placeholder="GitHub Link" />
               <Form.Control className='mb-3' type="text" placeholder="Linkedin Link" />
       
