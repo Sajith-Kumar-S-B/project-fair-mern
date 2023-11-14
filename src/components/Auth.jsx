@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import login from '../Assets/3d-account-login-and-password-form-page-vector-45098221-removebg-preview.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, json, useNavigate } from 'react-router-dom'
 import {Button, Form} from 'react-bootstrap';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { toast } from 'react-toastify';
-import { registerAPI } from '../services/allAPI';
+import { LoginAPI, registerAPI } from '../services/allAPI';
 
 function Auth({register}) {
 
@@ -45,11 +45,35 @@ const handleRegister = async (e)=>{
 
 }
 
-const handleLogin = (e)=>{
+const handleLogin = async (e)=>{
   e.preventDefault()
 const {email,password} = userData
   if(!email || !password){
     toast.info("Please fill the details")
+  }else{
+
+    const result = await LoginAPI(userData)
+
+
+    
+    if(result.status===200){
+      // toast.success(`${result.data.username} has successfully registered`)
+
+   sessionStorage.setItem("registeredUser",JSON.stringify(result.data.registeredUser))
+   sessionStorage.setItem("token",result.data.token)
+
+
+
+      setUserData({
+      email:'',password:''
+      })
+         navigate("/")
+    }else{
+
+      toast.warning(result.response.data)
+      console.log(result);
+    }
+
   }
 
 }
