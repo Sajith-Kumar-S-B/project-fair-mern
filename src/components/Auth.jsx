@@ -45,6 +45,15 @@ const handleRegister = async (e)=>{
 
 }
 
+const handleLogin = (e)=>{
+  e.preventDefault()
+const {email,password} = userData
+  if(!email || !password){
+    toast.info("Please fill the details")
+  }
+
+}
+
 
 
   return (
@@ -87,7 +96,7 @@ const handleRegister = async (e)=>{
         <button  onClick={handleRegister} className='btn btn-dark text-light mb-3 rounded' type='submit' >Register</button>
     <p>Already have an Account? Click here to <Link style={{textDecoration:'none'}}  to={'/login'}>Login</Link> </p>
       </div>:<div>
-        <button className='btn btn-dark text-light mb-3 rounded' type='submit' >Login</button>
+        <button onClick={handleLogin} className='btn btn-dark text-light mb-3 rounded' type='submit' >Login</button>
         <p className='text-dark'>Don't have an Account? Click here to <Link style={{textDecoration:'none'}}  to={'/register'}>Register</Link> </p>
 
         
