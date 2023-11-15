@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Row,Col, Button} from 'react-bootstrap'
 import titleImg from '../Assets/4183733.webp'
 import Projectcard from '../components/Projectcard'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 function Home() {
+  const [LoggedIn,setLoggedIn] = useState(false)
+  useEffect(()=>{
+   if(sessionStorage.getItem("token")){
+       setLoggedIn(true)
+   }else{
+    setLoggedIn(false)
+   }
+  },[])
   return (
     <>
     <Header/>
@@ -15,7 +23,7 @@ function Home() {
         <Col sm={12} md={6}>
           <h1 style={{fontSize:'50px'}}  className='fw-bolder text-dark'>Project Fair</h1>
           <p>One stop destination for all yopur projects. Where user can add ad manage their projects. As wella s access all our projects inn our website...</p>
-          <Link to={'/login'} className='btn bg-dark text-light'> Explore </Link>
+        {LoggedIn ? <Link to={'/dashboard'} className='btn bg-dark text-light'> Manage your Projects </Link> : <Link to={'/login'} className='btn bg-dark text-light'> Explore </Link>}
         </Col>
         <Col sm={12} md={6}>
          <img  className='w-75 ms-5 img-fluid' src={titleImg} alt="" />
