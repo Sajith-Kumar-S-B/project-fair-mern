@@ -54,21 +54,24 @@ useEffect(()=>{
     reqBody.append("overview",overview)
     reqBody.append("gitHub",gitHub)
     reqBody.append("website",website)
+    reqBody.append("projectImage",projectImage)
 
     if(token){
-      reqHeader = {
+      const reqHeader = {
         "Content-Type":"multipart/form-data",
         "Authorization":`Bearer ${token}`
       }
 
-    }
-    const result = await AddProjectAPI(reqBody,reqHeader)
+      const result = await AddProjectAPI(reqBody,reqHeader)
        if(result.status ===200){
         console.log(result.data);
        }else{
         console.log(result);
         console.log(result.response.data);
        }
+
+    }
+    
    }
 
 
