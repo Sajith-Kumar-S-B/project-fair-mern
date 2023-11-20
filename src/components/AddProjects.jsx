@@ -60,15 +60,20 @@ useEffect(()=>{
         "Authorization":`Bearer ${token}`
       }
 
-      const result = await AddProjectAPI(reqBody,reqHeader)
+    try{  const result = await AddProjectAPI(reqBody,reqHeader)
        if(result.status ===200){
         console.log(result.data);
         handleClose()
-        alert("Project Added")
+        toast.success("Project Added");
        }else{
         console.log(result);
         console.log(result.response.data);
+        toast.error("Failed to add project. Please try again.");
        }
+      }catch(err){
+        console.error("Error adding project:", error);
+        toast.error("An error occurred while adding the project. Please try again.");
+      }
 
     }
     
