@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import Projects from './Pages/Projects';
 import Footer from './components/Footer';
 import Auth from './components/Auth';
+import AddProjects from './components/AddProjects';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
      <Route path={'/login'} element={<Auth/>} />
      <Route path={'/register'} element={<Auth register />} />
      <Route path={'/projects'} element={<Projects/>} />
+     <Route path={'/projects/add'} element={<AddProjects/>} />
+
 
 
 

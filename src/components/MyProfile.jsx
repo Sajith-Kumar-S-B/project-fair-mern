@@ -5,9 +5,9 @@ import Collapse from 'react-bootstrap/Collapse';
 function MyProfile() {
   const [open, setOpen] = useState(false);
   return (
-    <div  className='card shadow p-5'>
+    <div   className='card shadow p-5'>
         <div className='d-flex justify-content-between align-items-center'>
-            <h3>My Profile</h3>
+            <h3 style={{textTransform:'none'}}>My Profile</h3>
             <div onClick={() => setOpen(!open)} className='bg-light px-2 rounded text-success'><i className="fa-solid fa-chevron-down fa-beat-fade"></i></div>
         </div>
         <Collapse in={open} >

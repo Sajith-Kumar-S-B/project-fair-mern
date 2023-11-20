@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import userImg from  '../Assets/147142.png'
 import { Form } from 'react-bootstrap';
 import {toast} from 'react-toastify'
 import { AddProjectAPI } from '../services/allAPI';
@@ -35,8 +34,7 @@ useEffect(()=>{
         }
 },[])
 
-    // console.log(projectDetails);
-
+    console.log(projectDetails);
 
 
     const handleAdd = async (e)=>{
@@ -65,6 +63,8 @@ useEffect(()=>{
       const result = await AddProjectAPI(reqBody,reqHeader)
        if(result.status ===200){
         console.log(result.data);
+        handleClose()
+        alert("Project Added")
        }else{
         console.log(result);
         console.log(result.response.data);
@@ -79,7 +79,7 @@ useEffect(()=>{
   return (
     <>
 
-<Button className='rounded-5' onClick={handleShow}>
+<Button style={{textTransform:'none'}} className='rounded-5' onClick={handleShow}>
         Add Projects
       </Button>
        <Modal
@@ -94,9 +94,9 @@ useEffect(()=>{
         <Modal.Body>
          <div className='row'>
             <div className='col-lg-6'>
-            <label className='text-center mt-5' htmlFor='profile'> 
-        <input onChange={e=>setProjectDetails({...projectDetails,projectImage:e.target.files[0]})} id='profile' style={{display:'none'}} type="file" />
-               <img className=' img-fluid'  width={'100%'} src={preview?preview:userImg} alt="" /></label>
+            <label className='text-center mt-5'> 
+        <input onChange={e=>setProjectDetails({...projectDetails,projectImage:e.target.files[0]})}  style={{display:'none'}} type="file" />
+               <img className=' img-fluid'  width={'100%'} src={preview?preview:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Icons8_flat_add_image.svg/512px-Icons8_flat_add_image.svg.png"} alt="" /></label>
             </div>
             <div className='col-lg-6'>
             <Form className='mb-3 text-center'>

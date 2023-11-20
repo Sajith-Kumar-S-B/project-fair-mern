@@ -5,7 +5,7 @@ function MyProjects() {
   return (
     <div className='card shadow p-3'>
       <div className='d-flex'>
-        <h3>My Projects</h3>
+        <h3 style={{textTransform:'none'}}>My Projects</h3>
         <div className='ms-auto'>
           <AddProjects/>
         </div>
