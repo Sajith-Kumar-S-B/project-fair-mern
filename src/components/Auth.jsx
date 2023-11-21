@@ -15,7 +15,6 @@ const navigate = useNavigate()
     const isRegisterForm = register?true:false
 
 
-
 const handleRegister = async (e)=>{
 
   e.preventDefault()

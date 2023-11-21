@@ -4,15 +4,35 @@ import titleImg from '../Assets/4183733.webp'
 import Projectcard from '../components/Projectcard'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
+import { homeProjectAPI } from '../services/allAPI'
 function Home() {
   const [LoggedIn,setLoggedIn] = useState(false)
+  const [homeProjects,setHomeProjects] = useState([])
+
+
+  const getHomeProjects = async()=>{
+    const result = await homeProjectAPI()
+    if(result.status===200){
+      setHomeProjects(result.data)
+    }else{
+      console.log(result);
+      console.log(result.response.data);
+    }
+
+  }
   useEffect(()=>{
    if(sessionStorage.getItem("token")){
        setLoggedIn(true)
    }else{
     setLoggedIn(false)
    }
+
+  //  api call
+
+  getHomeProjects()
   },[])
+
+  console.log(homeProjects);
   return (
     <>
     <Header/>
@@ -38,9 +58,13 @@ function Home() {
 
         <Row>
 
-        <Col sm={12} md={6} lg={4}>
-          <Projectcard/>
+        {homeProjects?.length>0 ? homeProjects.map((project)=>(
+          <Col sm={12} md={6} lg={4}>
+          <Projectcard project={project} />
         </Col>
+        )):null
+          }
+        
        
         </Row>
 
