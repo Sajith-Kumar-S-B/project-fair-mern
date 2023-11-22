@@ -16,8 +16,8 @@ function Projectcard({project}) {
     const handleShow = () => setShow(true);
   return (
     <>
-    {project && <Card style={{ width: '18rem',height:'14rem' }} className='shadow mb-5 border-0' onClick={handleShow} >
-      <Card.Img style={{width:'100%',height:'12rem'}} className='img-fluid p-1'  variant="top" src={project?`${BASE_URL}/uploads/${project.projectImage}`:projectPic} />
+    {project && <Card style={{ width: '25rem',height:'20rem',margin:'auto' }} className='shadow mb-5 border-0' onClick={handleShow} >
+      <Card.Img style={{width:'100%',height:'16rem'}} className='img-fluid p-1'  variant="top" src={project?`${BASE_URL}/uploads/${project.projectImage}`:projectPic} />
       <Card.Body>
         <Card.Title className='text-center'>{project?.title}</Card.Title>
         
