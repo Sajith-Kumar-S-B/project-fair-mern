@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import {toast} from 'react-toastify'
 import { AddProjectAPI } from '../services/allAPI';
+import { addProjectResponseContext } from '../Contexts/ContextShare';
 
 function AddProjects() {
+
+  const {addProjectResponse,setAddProjectResponse}= useContext(addProjectResponseContext)
     const [show, setShow] = useState(false);
   const [projectDetails,setProjectDetails] = useState({
     title:"",languages:"",overview:"",gitHub:"",website:"",projectImage:""
@@ -64,14 +67,14 @@ useEffect(()=>{
        if(result.status ===200){
         console.log(result.data);
         handleClose()
-        toast.success("Project Added");
+        setAddProjectResponse(result.data)
        }else{
         console.log(result);
         console.log(result.response.data);
         toast.error("Failed to add project. Please try again.");
        }
       }catch(err){
-        console.error("Error adding project:", error);
+        console.error("Error adding project:", err);
         toast.error("An error occurred while adding the project. Please try again.");
       }
 

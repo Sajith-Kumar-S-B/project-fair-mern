@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AddProjects from './AddProjects'
 import { userProjectAPI } from '../services/allAPI'
 import { toast } from 'react-toastify'
+import { addProjectResponseContext } from '../Contexts/ContextShare'
+import EditProject from './EditProject'
 
 function MyProjects() {
-
+const {addProjectResponse,setAddProjectResponse} = useContext(addProjectResponseContext)
   const [userProjects,setUserProjects] = useState([])
 
-
+  
       const getUserProjects = async ()=>{
         if(sessionStorage.getItem("token")){
           const token = sessionStorage.getItem("token")
@@ -26,10 +28,11 @@ function MyProjects() {
         }
       }
 
-
+     
+   
       useEffect(()=>{
         getUserProjects()
-      },[])
+      },[addProjectResponse])
   return (
     <div className='card shadow p-3'>
       <div className='d-flex'>
@@ -41,16 +44,15 @@ function MyProjects() {
       </div>
       <div className='mt-5'>
 
-       {userProjects?.length>0 ? userProjects.map(project=>(<div className='shadow d-flex align-items-center rounded p-2'>
+       {  userProjects?.length > 0 ? userProjects.map(project=>(
+       <div  className='border border-4   d-flex align-items-center rounded p-2 mb-3'>
           <h5>{project.title}</h5>
           <div className='icons ms-auto'>
-            <button className="btn"><i className="fa-solid fa-pen-to-square"></i></button>
+            <EditProject project={project} />
             <a href={`${project.gitHub}`} target='_blank' className="btn"><i className="fa-brands fa-github"></i></a>
             <button className="btn"><i className="fa-solid fa-trash"></i></button>
           </div>
-        </div> )) :
-
-        <p className='text-danger mt-5'>No Projects Uploaded</p>
+        </div> )) :(  <p className='text-danger mt-5'>No Projects Uploaded</p>)
 }
       </div>
 
