@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { BASE_URL } from '../services/baseUrl';
 import { toast } from 'react-toastify';
 import { EditProjectAPI } from '../services/allAPI';
+import { editProjectResponseContext } from '../Contexts/ContextShare';
 function EditProject({project}) {
-
+     const {editProjectResponse,setEditProjectResponse} = useContext(editProjectResponseContext)
     const [projectDetails,setProjectDetails] = useState({
        id:project._id, title:project.title,languages:project.languages,overview:project.overview,gitHub:project.gitHub,website:project.website,projectImage:""
       })
       const [preview,setPreview] = useState("")
 
     const [show, setShow] = useState(false);
-    const handleClose = () =>
-    { setShow(false);
+    const handleClose = () =>{ 
+      setShow(false);
 
    setProjectDetails({
     id:project._id, title:project.title,languages:project.languages,overview:project.overview,gitHub:project.gitHub,website:project.website,projectImage:""
@@ -25,7 +26,6 @@ function EditProject({project}) {
     }
     const handleShow = () => setShow(true);
 
-
 useEffect(()=>{
   if(projectDetails.projectImage){
     setPreview(URL.createObjectURL(projectDetails.projectImage))
@@ -33,12 +33,11 @@ useEffect(()=>{
 },[projectDetails.projectImage])
 
 
-const handleUpdate = async (e)=>{
+  const handleUpdate = async ()=>{
 
-  e.preventDefault()
       const {id,title,languages,gitHub,website,overview,projectImage} = projectDetails
 
-
+        
       if(!title || !languages || !gitHub || !website || !overview){
         toast.warning("please fill the details")
       }else{
@@ -60,22 +59,54 @@ const handleUpdate = async (e)=>{
 
             // api call
 
+           try{ 
             const result  = await EditProjectAPI(id,reqBody,reqHeader)
-            if(result.status===200){
-              handleClose()
+            console.log(result);
+
+            if(result?.status===200){
+             handleClose()
+             
+
               // pass response to projects
+
+              setEditProjectResponse(result.data)
             }else{
               console.log(result);
-              toast.error(result.response.data)
+              toast.error(result?.response.data)
             }
-
+}catch(err){
+  console.error("Error editing project:", err);
+  toast.error("An error occurred while adding the project. Please try again.");
+}
 
           }else{
 
             const reqHeader = {
-              "Content-Type":"application/form-data",
+              "Content-Type":"application/json",
               "Authorization":`Bearer ${token}`
             }
+
+
+            // api call
+try{
+            const result  = await EditProjectAPI(id,reqBody,reqHeader)
+            console.log(result);
+
+            if(result?.status===200){
+
+             handleClose()
+              // pass response to projects
+              setEditProjectResponse(result.data)
+
+            }else{
+              console.log(result);
+              toast.error(result?.response.data)
+            }
+          
+          }catch(err){
+            console.error("Error editing project:", err);
+            toast.error("An error occurred while adding the project. Please try again.");
+          }
 
           }
       }
@@ -124,7 +155,7 @@ const handleUpdate = async (e)=>{
           <Button variant="secondary" onClick={handleClose}>
             cancel
           </Button>
-          <Button onClick={handleUpdate} type='submit'  variant="primary">update</Button>
+          <Button onClick={handleUpdate}   variant="primary">update</Button>
         </Modal.Footer>
       </Modal>
     </>

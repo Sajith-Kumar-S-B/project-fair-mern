@@ -37,7 +37,7 @@ useEffect(()=>{
         }
 },[])
 
-    console.log(projectDetails);
+   
 
 
     const handleAdd = async (e)=>{
@@ -65,7 +65,6 @@ useEffect(()=>{
 
     try{  const result = await AddProjectAPI(reqBody,reqHeader)
        if(result.status ===200){
-        console.log(result.data);
         handleClose()
         setAddProjectResponse(result.data)
        }else{

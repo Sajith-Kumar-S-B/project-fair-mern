@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AddProjects from './AddProjects'
-import { userProjectAPI } from '../services/allAPI'
+import { deleteProjectAPI, userProjectAPI } from '../services/allAPI'
 import { toast } from 'react-toastify'
-import { addProjectResponseContext } from '../Contexts/ContextShare'
+import { addProjectResponseContext, editProjectResponseContext } from '../Contexts/ContextShare'
 import EditProject from './EditProject'
 
 function MyProjects() {
+  const {editProjectResponse,setEditProjectResponse} = useContext(editProjectResponseContext)
 const {addProjectResponse,setAddProjectResponse} = useContext(addProjectResponseContext)
   const [userProjects,setUserProjects] = useState([])
 
@@ -32,7 +33,33 @@ const {addProjectResponse,setAddProjectResponse} = useContext(addProjectResponse
    
       useEffect(()=>{
         getUserProjects()
-      },[addProjectResponse])
+      },[addProjectResponse,editProjectResponse])
+
+
+   const handleDelete = async (id)=>{
+       const token = sessionStorage.getItem("token")
+
+    const reqHeader = {
+      "Content-Type":"application/json",
+      "Authorization":`Bearer ${token}`
+    }
+
+
+    const result = await deleteProjectAPI(id,reqHeader)
+
+    if(result.status===200){
+      // page reload
+
+      getUserProjects()
+    }else{
+      toast.error(result.response.data)
+    }
+
+
+   }
+
+
+
   return (
     <div className='card shadow p-3'>
       <div className='d-flex'>
