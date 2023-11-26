@@ -59,11 +59,11 @@ useEffect(()=>{
 
             // api call
 
-           try{ 
+          
             const result  = await EditProjectAPI(id,reqBody,reqHeader)
             console.log(result);
 
-            if(result?.status===200){
+            if(result.status===200){
              handleClose()
              
 
@@ -72,12 +72,9 @@ useEffect(()=>{
               setEditProjectResponse(result.data)
             }else{
               console.log(result);
-              toast.error(result?.response.data)
+              toast.error(result.response.data)
             }
-}catch(err){
-  console.error("Error editing project:", err);
-  toast.error("An error occurred while adding the project. Please try again.");
-}
+
 
           }else{
 
@@ -88,11 +85,11 @@ useEffect(()=>{
 
 
             // api call
-try{
+
             const result  = await EditProjectAPI(id,reqBody,reqHeader)
             console.log(result);
 
-            if(result?.status===200){
+            if(result.status===200){
 
              handleClose()
               // pass response to projects
@@ -100,13 +97,10 @@ try{
 
             }else{
               console.log(result);
-              toast.error(result?.response.data)
+              toast.error(result.response.data)
             }
           
-          }catch(err){
-            console.error("Error editing project:", err);
-            toast.error("An error occurred while adding the project. Please try again.");
-          }
+         
 
           }
       }
