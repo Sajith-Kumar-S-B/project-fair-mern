@@ -8,18 +8,20 @@ import Projects from './Pages/Projects';
 import Footer from './components/Footer';
 import Auth from './components/Auth';
 import AddProjects from './components/AddProjects';
+import { useContext } from 'react';
+import { tokenAuthorisationContext } from './Contexts/TokenAuth';
 
 function App() {
+  const {isAuthorized,setIsAuthorized} = useContext(tokenAuthorisationContext)
   return (
     <div className='app'>
 
     <Routes>
      <Route path={'/'} element={<Home/>} />
-     <Route path={'/dashboard'} element={<DashBoard/>} />
+     <Route path={'/dashboard'} element={isAuthorized?<DashBoard/>:<Home/>} />
      <Route path={'/login'} element={<Auth/>} />
      <Route path={'/register'} element={<Auth register />} />
-     <Route path={'/projects'} element={<Projects/>} />
-     <Route path={'/projects/add'} element={<AddProjects/>} />
+     <Route path={'/projects'} element={isAuthorized? <Projects/>:<Home/>} />
 
 
 

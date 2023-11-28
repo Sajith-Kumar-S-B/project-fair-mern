@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import login from '../Assets/3d-account-login-and-password-form-page-vector-45098221-removebg-preview.png'
 import { Link, json, useNavigate } from 'react-router-dom'
 import {Button, Form} from 'react-bootstrap';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { toast } from 'react-toastify';
 import { LoginAPI, registerAPI } from '../services/allAPI';
+import { tokenAuthorisationContext } from '../Contexts/TokenAuth';
 
 function Auth({register}) {
-
+    const {isAuthorized,setIsAuthorized} = useContext(tokenAuthorisationContext)
 const navigate = useNavigate()
   const [userData,setUserData] = useState({
     username:"",email:"",password:""
@@ -61,7 +62,7 @@ const {email,password} = userData
    sessionStorage.setItem("registeredUser",JSON.stringify(result.data.registeredUser))
    sessionStorage.setItem("token",result.data.token)
 
-
+    setIsAuthorized(true)
 
       setUserData({
       email:'',password:''

@@ -46,7 +46,7 @@ const {addProjectResponse,setAddProjectResponse} = useContext(addProjectResponse
 
 
     const result = await deleteProjectAPI(id,reqHeader)
-
+console.log(result)
     if(result.status===200){
       // page reload
 
@@ -77,7 +77,7 @@ const {addProjectResponse,setAddProjectResponse} = useContext(addProjectResponse
           <div className='icons ms-auto'>
             <EditProject project={project} />
             <a href={`${project.gitHub}`} target='_blank' className="btn"><i className="fa-brands fa-github"></i></a>
-            <button className="btn"><i className="fa-solid fa-trash"></i></button>
+            <button onClick={()=>handleDelete(project._id)} className="btn"><i className="fa-solid fa-trash"></i></button>
           </div>
         </div> )) :(  <p className='text-danger mt-5'>No Projects Uploaded</p>)
 }
