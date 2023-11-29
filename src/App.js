@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes} from 'react-router-dom'
+import {Navigate, Route, Routes} from 'react-router-dom'
 import Home from './Pages/Home';
 import DashBoard from './Pages/DashBoard';
 import { ToastContainer } from 'react-toastify';
@@ -22,6 +22,8 @@ function App() {
      <Route path={'/login'} element={<Auth/>} />
      <Route path={'/register'} element={<Auth register />} />
      <Route path={'/projects'} element={isAuthorized? <Projects/>:<Home/>} />
+     <Route path={'/*'} element={<Navigate to={"/"} />} />
+
 
 
 
