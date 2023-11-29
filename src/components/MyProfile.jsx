@@ -17,7 +17,7 @@ function MyProfile() {
   useEffect(()=>{
     const user = JSON.parse(sessionStorage.getItem("registeredUser"))
  
-    setUserProfile({...userProfile,username:user.username,email:user.email,password:user.password,profile:"",gitHub:user.github,linkedin:user.linkedin})
+    setUserProfile({...userProfile,username:user.username,email:user.email,password:user.password,profile:"",github:user.github,linkedin:user.linkedin})
      setExistingImage(user.profile)
    
   },[open])
