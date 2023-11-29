@@ -32,7 +32,7 @@ function Home() {
   getHomeProjects()
   },[])
 
-  console.log(homeProjects);
+  // console.log(homeProjects);
   return (
     <>
     <Header/>
